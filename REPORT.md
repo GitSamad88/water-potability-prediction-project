@@ -98,21 +98,6 @@ raw F1 score (0.548) but trails on accuracy and AUC.
 **No model here is strong enough for production use as-is** — at best, ~67–70% accuracy and a ROC AUC
 around 0.7, on a binary task with notable class imbalance.
 
-## 5. Notable Issues Found in the Original Notebook
-
-The version of this notebook originally provided had several bugs that prevented it from running and a
-few correctness issues; all are fixed in the version included in this repository. See `README.md` for the
-itemized list. The most important:
-
-- **`SyntaxError` on import** — trailing commas left `StandardScaler,` and `Kfold,` (also misspelled —
-  should be `KFold`) as incomplete import statements, which would crash the notebook on the very first
-  cell.
-- **Stale-variable bug** — a later cell printed `f"Evaluating {name}..."` relying on a leftover loop
-  variable `name` from an earlier, unrelated `for` loop, rather than stating the model name directly. It
-  happened to print the right label only because of the order cells were executed in — not because the
-  code was actually correct.
-- **Unused imports** (`LinearRegression`, `os`, `sys`, `re`) — harmless, but worth removing for clarity.
-
 ## 6. Limitations & Recommendations
 
 - **Data loss from `dropna()`** — dropping all rows with any missing value discards ~38.6% of the
